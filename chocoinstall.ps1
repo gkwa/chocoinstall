@@ -1,3 +1,10 @@
+<#
+
+Usage:
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/TaylorMonacelli/chocoinstall/master/chocoinstall.ps1'))
+
+#>
+
 # .Net 4.6.2:
 $url="https://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe"
 $outfile="NDP462-KB3151800-x86-x64-AllOS-ENU.exe"
