@@ -13,7 +13,7 @@ $outfile="NDP462-KB3151800-x86-x64-AllOS-ENU.exe"
 if(!(test-path $outfile)){
 	(new-object System.Net.WebClient).DownloadFile($url, $outfile)
 }
-cmd /c start /wait ./NDP462-KB3151800-x86-x64-AllOS-ENU.exe /q
+cmd /c start /wait ./NDP462-KB3151800-x86-x64-AllOS-ENU.exe /q /norestart
 
 # Windows Management Framework (WMF) 5.0
 $url="https://download.microsoft.com/download/2/C/6/2C6E1B4A-EBE5-48A6-B225-2D2058A9CEFB/Win7-KB3134760-x86.msu"
@@ -21,7 +21,7 @@ $outfile="Win7-KB3134760-x86.msu"
 if(!(test-path $outfile)){
 	(new-object System.Net.WebClient).DownloadFile($url, $outfile)
 }
-cmd /c start /wait ./NDP462-KB3151800-x86-x64-AllOS-ENU.exe /q
+cmd /c start /wait ./NDP462-KB3151800-x86-x64-AllOS-ENU.exe /q /norestart
 
 mkdir KB3134760
 expand -f:* $pwd\Win7-KB3134760-x86.msu KB3134760
