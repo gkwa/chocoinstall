@@ -13,3 +13,6 @@ cmd /c start /wait ./NDP462-KB3151800-x86-x64-AllOS-ENU.exe /q
 mkdir KB3134760
 expand -f:* $pwd\Win7-KB3134760-x86.msu KB3134760
 dism.exe /norestart /Online /Add-Package /PackagePath:$pwd\KB3134760\Windows6.1-KB3134760-x86.cab
+
+# Finally install chocolatey
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
