@@ -16,3 +16,6 @@ dism.exe /norestart /Online /Add-Package /PackagePath:$pwd\KB3134760\Windows6.1-
 
 # Finally install chocolatey
 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+$env:PATH += ";${env:SYSTEMDRIVE}ProgramData\chocolatey"
+choco install powershell --yes
