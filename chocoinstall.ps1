@@ -21,7 +21,6 @@ $outfile="Win7-KB3134760-x86.msu"
 if(!(test-path $outfile)){
 	(new-object System.Net.WebClient).DownloadFile($url, $outfile)
 }
-cmd /c start /wait ./NDP462-KB3151800-x86-x64-AllOS-ENU.exe /q /norestart
 
 mkdir KB3134760
 expand -f:* $pwd\Win7-KB3134760-x86.msu KB3134760
