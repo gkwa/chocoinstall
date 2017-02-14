@@ -1,10 +1,12 @@
 <#
 
 Usage:
+Set-ExecutionPolicy Unrestricted
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/TaylorMonacelli/chocoinstall/master/chocoinstall.ps1'))
 
 #>
 
+#FIXME: sign this script so I don't have to run urestricted.
 #FIXME: this reboots.  Not sure which step is doing it.
 
 # .Net 4.6.2:
