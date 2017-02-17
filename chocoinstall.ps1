@@ -4,6 +4,8 @@ Usage:
 Set-ExecutionPolicy Unrestricted
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/TaylorMonacelli/chocoinstall/master/chocoinstall.ps1'))
 
+TODO: Don't re-install .net if you don't have too, consider: http://www.powershelladmin.com/wiki/List_installed_.NET_versions_on_remote_computers
+
 #>
 
 #FIXME: sign this script so I don't have to run urestricted.
