@@ -9,6 +9,14 @@ TODO: Don't re-install .net if you don't have too, consider: http://www.powershe
 
 #FIXME: sign this script so I don't have to run urestricted.
 
+$minSpaceMB=125
+$disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Select-Object Size,FreeSpace
+if([Math]::Round($disk.Freespace / 1MB) -lt $minSpaceMB)
+{
+	Write-Host "I need at least $minSpaceMB, quitting"
+	Exit 1
+}
+
 # .Net 4.6.2:
 $url="https://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe"
 $outfile="NDP462-KB3151800-x86-x64-AllOS-ENU.exe"
