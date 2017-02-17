@@ -25,7 +25,7 @@ if(!(test-path $outfile)){
 
 mkdir KB3134760
 expand -f:* $pwd\Win7-KB3134760-x86.msu KB3134760
-dism.exe /norestart /Online /Add-Package /PackagePath:$pwd\KB3134760\Windows6.1-KB3134760-x86.cab
+dism.exe /norestart /Quiet /Online /Add-Package /PackagePath:$pwd\KB3134760\Windows6.1-KB3134760-x86.cab
 
 # Finally install chocolatey
 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
