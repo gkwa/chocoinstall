@@ -11,9 +11,10 @@ TODO: Don't re-install .net if you don't have too, consider: http://www.powershe
 
 $minSpaceMB=125
 $disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Select-Object Size,FreeSpace
-if([Math]::Round($disk.Freespace / 1MB) -lt $minSpaceMB)
+$freeSpaceMB = [Math]::Round($disk.Freespace / 1MB)
+if($freeSpaceMB -lt $minSpaceMB)
 {
-	Write-Host "I need at least $minSpaceMB, quitting"
+	Write-Host "I need at least $minSpaceMB MB, but only $freeSpaceMB is available, quitting"
 	Exit 1
 }
 
