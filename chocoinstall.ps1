@@ -45,18 +45,25 @@ if([Version]'4.6.2' -gt ((Get-DotNetVersions).Version | Sort-Object | Get-Unique
 		(new-object System.Net.WebClient).DownloadFile($url, $outfile)
 	}
 	cmd /c start /wait ./NDP462-KB3151800-x86-x64-AllOS-ENU.exe /q /norestart
+	if($?) {
+		Remove-Item NDP462-KB3151800-x86-x64-AllOS-ENU.exe >$null
+	}
 }
 
 # Windows Management Framework (WMF) 5.0
 $url="https://download.microsoft.com/download/2/C/6/2C6E1B4A-EBE5-48A6-B225-2D2058A9CEFB/Win7-KB3134760-x86.msu"
-$outfile="Win7-KB3134760-x86.msu"
+$outfile="${env:TEMP}\Win7-KB3134760-x86.msu"
 if(!(test-path $outfile)){
 	(new-object System.Net.WebClient).DownloadFile($url, $outfile)
 }
 
-mkdir KB3134760
-expand -f:* $pwd\Win7-KB3134760-x86.msu KB3134760
-dism.exe /norestart /Quiet /Online /Add-Package /PackagePath:$pwd\KB3134760\Windows6.1-KB3134760-x86.cab
+mkdir "${env:TEMP}\KB3134760" >$null
+expand -f:* $outfile "${env:TEMP}\KB3134760"
+dism.exe /norestart /Quiet /Online /Add-Package /PackagePath:"${env:TEMP}\KB3134760\Windows6.1-KB3134760-x86.cab"
+if($?) {
+	Remove-Item -Recurse "${env:TEMP}\KB3134760" >$null
+}
+
 
 # Finally install chocolatey
 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
