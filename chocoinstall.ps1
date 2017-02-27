@@ -27,6 +27,28 @@ function Get-DotNetVersions {
 	  }
 }
 
+function Test-NeedDotNetUpdate {
+
+	$is462OrGreater = $false
+	try {
+		$installed = (Get-DotNetVersions).Version |
+		  Sort-Object -Descending | Select-Object -first 1
+	} Catch [System.Management.Automation.RuntimeException] {
+		$message = "TRAPPED: {0}: '{1}'" -f ($_.Exception.GetType().FullName),($_.Exception.Message)
+		if($message -like '*Undocumented 4.6.2 or higher*'){
+			$is462OrGreater = $true
+		}
+	}
+
+	if($is462OrGreater) {
+		return $false
+	}
+
+	if([version]'4.6.2' -gt [version]$installed) {
+		return $true
+	}
+}
+
 $minSpaceMB=125
 $disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Select-Object Size,FreeSpace
 $freeSpaceMB = [Math]::Round($disk.Freespace / 1MB)
@@ -37,7 +59,7 @@ if($freeSpaceMB -lt $minSpaceMB)
 }
 
 # Check and Install .Net 4.6.2 if necessary
-if([Version]'4.6.2' -gt ((Get-DotNetVersions).Version | Sort-Object | Get-Unique | Select-Object -Last 1)) {
+if(Test-NeedDotNetUpdate) {
 
 	$url="https://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe"
 	$outfile="NDP462-KB3151800-x86-x64-AllOS-ENU.exe"
