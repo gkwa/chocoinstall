@@ -91,7 +91,7 @@ if(!(test-path $outfile)){
     (new-object System.Net.WebClient).DownloadFile($url, $outfile)
 }
 
-mkdir "${env:TEMP}\KB3134760" >$null
+mkdir -Force "${env:TEMP}\KB3134760" >$null
 expand -f:* $outfile "${env:TEMP}\KB3134760"
 dism.exe /norestart /Quiet /Online /Add-Package /PackagePath:"${env:TEMP}\KB3134760\Windows6.1-KB3134760-x86.cab"
 if($?) {
