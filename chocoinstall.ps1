@@ -84,19 +84,8 @@ if(Test-NeedDotNetUpdate) {
     }
 }
 
-# Windows Management Framework (WMF) 5.0
-$url="https://download.microsoft.com/download/2/C/6/2C6E1B4A-EBE5-48A6-B225-2D2058A9CEFB/Win7-KB3134760-x86.msu"
-$outfile="${env:TEMP}\Win7-KB3134760-x86.msu"
-if(!(test-path $outfile)){
-    (new-object System.Net.WebClient).DownloadFile($url, $outfile)
-}
-
-mkdir -Force "${env:TEMP}\KB3134760" >$null
-expand -f:* $outfile "${env:TEMP}\KB3134760"
-dism.exe /norestart /Quiet /Online /Add-Package /PackagePath:"${env:TEMP}\KB3134760\Windows6.1-KB3134760-x86.cab"
-if($?) {
-    Remove-Item -Recurse "${env:TEMP}\KB3134760" >$null
-}
+# Windows Management Framework (WMF) 5.1
+cinst --yes powershell
 
 
 # Finally install chocolatey
