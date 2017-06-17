@@ -84,7 +84,7 @@ if(Test-NeedDotNetUpdate) {
     }
 }
 
-# Windows Management Framework (WMF) 5.1
+# Windows Management Framework (WMF)
 cinst --yes powershell
 
 
