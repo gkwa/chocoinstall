@@ -84,12 +84,9 @@ if(Test-NeedDotNetUpdate) {
     }
 }
 
-# Windows Management Framework (WMF)
-cinst --yes powershell
-
-
 # Finally install chocolatey
 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
+# Windows Management Framework (WMF)
 $env:PATH += ";${env:SYSTEMDRIVE}\ProgramData\chocolatey"
-choco install powershell --yes
+cinst --yes powershell
